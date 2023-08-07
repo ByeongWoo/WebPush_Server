@@ -1,0 +1,52 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 1800
+      cookie:
+        max-age: 1800
+        #name: SID # 세션 쿠키의 이름
+        #http-only: true # 이 값이 true로 설정되면 JavaScript에서 세션 쿠키에 접근 X
+        #secure: true  # 이 값이 true로 설정되면 HTTPS 연결에서만 세션 쿠키를 전송
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    include-stacktrace: never
+
+# 2.4 -
+spring:
+  profiles:
+    active: local
+# 2.4 +
+#spring:
+#  config:
+#    activate:
+#      on-profile: local
+  datasource:
+    url: jdbc:oracle:thin:@(DESCRIPTION=(FAILOVER=ON)(LOAD_BALANCE=OFF)(ADDRESS=(PROTOCOL=TCP)(HOST=10.10.80.75)(PORT=1521))(ADDRESS= (PROTOCOL=TCP)(HOST=10.10.80.76)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=RINGODB)))
+    username: rbt
+    password: rbt
+    driver-class-name: oracle.jdbc.OracleDriver
+
+mybatis:
+  mapper-locations:
+  - classpath:mapper/**/*.xml 
+  
+logging:
+  file:
+    path: C:/Users/jsper/log
+    filename: local_log 
+  level:
+    root: info
+    com:
+      web:
+        push: debug
+  config: classpath:logback-local.xml   
+
+push:  
+  publicKey: BDCuwEJaNg8f8UtTnD4yylmCuWsTCxxVoA-VXWExkxtCDC8U4yadV3aEUptbMvid_ctsDevpP-0NH40V-6AfW8k
+  privateKey: jcXlqHYI5CV9j4R1EF71kuptaHOEzMkz9PThic_6ee0 
+  

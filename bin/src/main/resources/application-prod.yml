@@ -1,0 +1,34 @@
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 1800
+      cookie:
+        max-age: 1800
+        #name: SID # 세션 쿠키의 이름
+        #http-only: true # 이 값이 true로 설정되면 JavaScript에서 세션 쿠키에 접근 X
+        #secure: true  # 이 값이 true로 설정되면 HTTPS 연결에서만 세션 쿠키를 전송
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  error:
+    include-stacktrace: never
+
+# 2.4 +
+spring:
+  config:
+    activate:
+      on-profile: local
+logging:
+  file:
+    path: /home/wrapcore/log
+    filename: prod_log 
+  level:
+    root: info
+    com:
+      web:
+        push: debug
+  config: classpath:logback-prod.xml   
+  

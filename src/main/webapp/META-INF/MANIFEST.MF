@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Build-Jdk-Spec: 14
+Implementation-Title: webpush
+Implementation-Version: prod
+Created-By: Maven Integration for Eclipse
+

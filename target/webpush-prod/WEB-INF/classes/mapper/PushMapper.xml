@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.web.push.mapper.PushMapper">
+
+	<resultMap type="com.web.push.model.WebPush" id="pushMap">
+	  <id property="seq" column="seq"/>
+		<result property="endpoint" column="endpoint" />
+		<result property="p256dh" column="p256dh" />
+		<result property="auth" column="auth" />
+	</resultMap>
+	
+	<select id="getWebpush_seq" resultType="int">
+    SELECT nextval('wrap.seq_webpush')
+  </select>
+
+	<insert id="insertPush" parameterType="com.web.push.model.WebPush">
+    INSERT INTO wrap.webpush(seq, endpoint, p256dh, auth)
+    VALUES (#{seq}, #{endpoint}, #{p256dh}, #{auth})
+	</insert>
+	
+	<select id="getWebPush" resultType="int" parameterType="string">
+	  SELECT COUNT(*) AS cnt
+	  FROM wrap.webpush w
+	  WHERE w.auth = #{auth}
+  </select>
+	
+	<select id="getWebPushAll" resultMap="pushMap">
+    select *
+    from wrap.webpush
+  </select>
+  
+</mapper>
